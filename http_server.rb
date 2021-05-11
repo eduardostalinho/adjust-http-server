@@ -2,6 +2,8 @@ require 'socket'
 
 server  = TCPServer.new('0.0.0.0', 80)
 
+$stdout.sync = true
+
 loop {
   client  = server.accept
   request = client.readpartial(2048)
