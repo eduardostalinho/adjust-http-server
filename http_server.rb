@@ -11,10 +11,15 @@ loop {
   puts "#{method} #{path} #{version}"
 
   if path == "/healthcheck"
-    client.write("OK")
+    response = "OK"
   else
-    client.write("Well, hello there!")
+    response = "Well, hello there!"
   end
+
+  client.print "#{version} 200\r\n"
+  client.print "Content-Length: #{response.bytesize}\r\n"
+  client.print "\r\n"
+  client.print response
 
   client.close
 }
