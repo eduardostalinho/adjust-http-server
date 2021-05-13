@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: http-server
+  name: http-server
+  namespace: http-server
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: http-server
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: http-server
+    spec:
+      containers:
+      - image: eduardostalinho/adjust-http-server:v0.0.4
+        ports:
+        - containerPort: 80
+          name: http
+        name: adjust-http-server
+        resources: {}
+        livenessProbe:
+          httpGet:
+            path: /healthcheck
+            port: http
+          initialDelaySeconds: 3
+          periodSeconds: 3
+status: {}
