@@ -5,5 +5,5 @@ USER 1000:1000
 
 WORKDIR /app
 
-COPY http_server.rb .
+ADD http_server.rb .
 CMD ["ruby", "http_server.rb"]
