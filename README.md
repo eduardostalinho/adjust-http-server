@@ -8,9 +8,18 @@ All other paths return "Well, hello there!"
 
 
 ## Deploy on kubernetes
+
+To deploy the application to your kubernetes cluster, please use:
 ```
 helm upgrade -i --create-namespace --namespace http-server http-server helm-chart/
 ```
+
+## Accessing the application from outside the cluster
+```
+kubectl port-forward -n http-server service/http-server 8080:8080
+```
+
+Point your browser to `localhost:8080`.
 
 ## Architecture on kubernetes
 The application runs on a `deployment` called http-server.
